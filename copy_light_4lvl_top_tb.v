@@ -1,0 +1,82 @@
+`timescale 1ns/1ns
+module copy_light_4lvl_top_tb();
+reg clk = 0;
+reg rst ;
+reg button_up;
+reg button_down;
+always clk = #5 ~clk;
+copy_light_4lvl_top i_uut
+(
+	.clk		(clk),
+	.rst		(rst),
+	.button_up		(button_up),
+	.button_down	(button_down),
+	
+	.light	()
+);
+initial begin
+	button_up = 0;
+	button_down = 0;
+	rst = 1;
+	#11;
+	rst = 0;
+	
+	#100;
+	button_up = 1;
+	#100;
+	button_up = 0;
+	
+	#100;
+	button_up = 1;
+	#100;
+	button_up = 0;
+	
+	#100;
+	button_up = 1;
+	#100;
+	button_up = 0;
+	
+	#100;
+	button_up = 1;
+	#100;
+	button_up = 0;
+	
+	#100;
+	button_up = 1;
+	#100;
+	button_up = 0;
+	
+	#100;
+	button_down = 1;
+	#100;
+	button_down = 0;
+	
+	#100;
+	button_down = 1;
+	#100;
+	button_down = 0;
+	
+	#100;
+	button_down = 1;
+	button_up = 1;
+	#100;
+	button_down = 0;
+	button_up = 0;
+	
+	#100;
+	button_down = 1;
+	#100;
+	button_down = 0;
+	
+	#100;
+	button_down = 1;
+	#100;
+	button_down = 0;
+	
+	#100;
+	button_down = 1;
+	#100;
+	button_down = 0;
+end
+
+endmodule

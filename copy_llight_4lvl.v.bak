@@ -1,0 +1,53 @@
+module copy_light_4lvl
+(
+    input button_up,
+    input button_down,
+    input clk,
+    input rst,
+    output reg [1:0] light
+);
+
+reg [1:0] state;
+reg [1:0] next_state;
+
+parameter S0 = 2'b00;
+parameter S1 = 2'b01;
+parameter S2 = 2'b11;
+parameter S3 = 2'b10;
+
+always @(posedge rst or posedge clk)
+begin
+    if (rst)
+    state <= S0;
+    else state <= next_state;
+end
+
+always @(*)
+begin
+    if (button_up & !button_down)
+    begin
+        case(state)
+        S0 : next_state = S1;
+        S1 : next_state = S2;
+        S2 : next_state = S3;
+        S3 : next_state = S0;
+        endcase
+    end
+    if (! button_up & button_down)
+    begin
+        case(state)
+        S0 : next_state = S0;
+        S1 : next_state = S0;
+        S2 : next_state = S1;
+        s3 : next_state = S2;
+        endcase
+    end
+end
+
+always @(*)
+    light = state;
+
+endmodule
+
+
+
